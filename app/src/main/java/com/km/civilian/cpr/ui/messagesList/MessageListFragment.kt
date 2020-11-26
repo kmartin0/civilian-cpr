@@ -19,9 +19,10 @@ import com.km.civilian.cpr.ui.messagesList.adapter.MessageClickListener
 import com.km.civilian.cpr.ui.messagesList.adapter.MessageItemDecoration
 import com.km.civilian.cpr.ui.messagesList.adapter.MessagesAdapter
 import com.km.civilian.cpr.util.MapsUtils
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_message_list.*
 
-
+@AndroidEntryPoint
 class MessageListFragment : BaseMVVMFragment<FragmentMessageListBinding, MessageListViewModel>(),
     MessageClickListener {
 

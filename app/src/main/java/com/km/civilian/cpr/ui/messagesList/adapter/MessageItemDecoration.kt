@@ -5,8 +5,11 @@ import android.graphics.Rect
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.km.civilian.cpr.R
+import dagger.hilt.android.qualifiers.ApplicationContext
+import javax.inject.Inject
 
-class MessageItemDecoration(private val context: Context) : RecyclerView.ItemDecoration() {
+class MessageItemDecoration @Inject constructor(@ApplicationContext private val context: Context) :
+    RecyclerView.ItemDecoration() {
 
     /**
      * Set the spacing between message items.

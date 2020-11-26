@@ -36,12 +36,6 @@ class NotificationBuilder {
                             .format(message.date)
                     )
                 )
-//                .setContentTitle(
-//                    "${context.getString(R.string.emergency)}: ${
-//                        DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT)
-//                            .format(message.date)
-//                    }"
-//                )
                 .setContentText(message.text)
                 .setStyle(
                     NotificationCompat.BigTextStyle()
@@ -57,7 +51,6 @@ class NotificationBuilder {
             // Display the notification.
             NotificationManagerCompat.from(context).notify(0, builder.build())
         }
-
 
         /**
          * Create a notification channel to assign with a notification.

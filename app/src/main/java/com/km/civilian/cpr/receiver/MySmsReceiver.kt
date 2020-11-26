@@ -6,19 +6,23 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.telephony.SmsMessage
-import com.km.civilian.cpr.database.AppDatabase
 import com.km.civilian.cpr.enum.MessageType
 import com.km.civilian.cpr.model.Message
-import com.km.civilian.cpr.repository.MessageRepository
+import com.km.civilian.cpr.repository.IMessageRepository
 import com.km.civilian.cpr.util.Constants
 import com.km.civilian.cpr.util.NotificationBuilder
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.util.*
+import javax.inject.Inject
 
-
+@AndroidEntryPoint
 class MySmsReceiver : BroadcastReceiver() {
+
+    @Inject
+    lateinit var messageRepository: IMessageRepository
 
     /**
      * Listens for sms messages received.
@@ -31,9 +35,6 @@ class MySmsReceiver : BroadcastReceiver() {
 
         // Insert the message in the app database if it contains text.
         if (message.text.isNotBlank()) {
-            val db = AppDatabase.getDatabase(context)
-            val messageRepository = MessageRepository(db.messageDao())
-
             GlobalScope.launch(Dispatchers.IO) {
                 messageRepository.insert(message)
             }

@@ -3,6 +3,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: "androidx.navigation.safeargs.kotlin"
 apply plugin: "kotlin-kapt"
+apply plugin: 'dagger.hilt.android.plugin'
 
 android {
     compileSdkVersion 29
@@ -53,6 +54,8 @@ ext {
     espressoVersion = '3.3.0'
     activity_version = '1.2.0-beta01'
     room_version = '2.2.5'
+    hilt_version = '2.30.1-alpha'
+    hilt_jetpack_integration_version = '1.0.0-alpha01'
 }
 
 dependencies {
@@ -93,4 +96,11 @@ dependencies {
     implementation "androidx.room:room-runtime:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
     implementation "androidx.room:room-ktx:$room_version"
+
+    // Hilt
+    implementation "com.google.dagger:hilt-android:$hilt_version"
+    kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
+    implementation "androidx.hilt:hilt-lifecycle-viewmodel:$hilt_jetpack_integration_version"
+    kapt "androidx.hilt:hilt-compiler:$hilt_jetpack_integration_version"
+
 }

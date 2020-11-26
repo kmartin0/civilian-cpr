@@ -1,19 +1,18 @@
 package com.km.civilian.cpr.ui.messagesList
 
-import android.app.Application
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.km.civilian.cpr.base.BaseViewModel
-import com.km.civilian.cpr.database.AppDatabase
 import com.km.civilian.cpr.model.Message
-import com.km.civilian.cpr.repository.MessageRepository
+import com.km.civilian.cpr.repository.IMessageRepository
 import kotlinx.coroutines.launch
 
-class MessageListViewModel(application: Application) : BaseViewModel(application) {
-
-    private val db = AppDatabase.getDatabase(application.applicationContext)
-    private val messageRepository = MessageRepository(db.messageDao())
+class MessageListViewModel @ViewModelInject constructor(
+    private val messageRepository: IMessageRepository
+) : BaseViewModel() {
 
     val messages: LiveData<List<Message>> = messageRepository.allMessages.asLiveData()
 
