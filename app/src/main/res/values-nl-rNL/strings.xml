@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Burgerhulpverlening Companion</string>
+
+    <string name="message_deleted_message">Berichten succesvol verwijderd.</string>
+    <string name="undo">Ongedaan maken</string>
+    <string name="message_share">Bericht delen</string>
+
+    <string name="msg_clipboard_label">Burgerhulpverlening bericht</string>
+    <string name="copy_success_message">Bericht naar klembord gekopieerd</string>
+    <string name="civil_assistance">Burgerhulpverlening</string>
+    <string name="emergency">Noodgeval</string>
+    <string name="notification_title">Noodgeval: %s</string>
+</resources>

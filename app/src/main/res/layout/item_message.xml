@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="@dimen/key_line_4"
+        android:text="maandag 12 juni 2019 15:03"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="#ffffff"
+        app:layout_constraintBottom_toBottomOf="@id/tvDate"
+        app:layout_constraintEnd_toStartOf="@id/tvDate"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tvDate" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="#ffffff"
+        app:layout_constraintBottom_toBottomOf="@id/tvDate"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tvDate"
+        app:layout_constraintTop_toTopOf="@id/tvDate" />
+
+    <ImageView
+        android:id="@+id/ivType"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="@dimen/key_line_3"
+        android:src="@drawable/ic_defibrillator"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvDate" />
+
+    <com.google.android.material.checkbox.MaterialCheckBox
+        android:id="@+id/cbSelect"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@id/ivType"
+        app:layout_constraintStart_toStartOf="@id/ivType"
+        app:layout_constraintTop_toTopOf="@id/ivType" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvMessage"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/key_line_3"
+        android:layout_marginEnd="@dimen/key_line_3"
+        android:autoLink="web"
+        android:background="@color/color_surface"
+        android:foreground="?attr/selectableItemBackground"
+        android:padding="@dimen/key_line_2"
+        android:text="NL-Alert 08-06-2020 12:00 CONTROLERBERICHT. U hoeft niets te doen. Meer informatie op www.nl-alert.nl *** TEST MESSAGE Netherlands Governemnt Public Warning System. No action required. More information: www.nl-alert.nl/english"
+        app:layout_constraintEnd_toStartOf="@id/ivMaps"
+        app:layout_constraintStart_toEndOf="@id/ivType"
+        app:layout_constraintTop_toTopOf="@id/ivType" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/ivMaps"
+        android:layout_width="38dp"
+        android:layout_height="38dp"
+        android:adjustViewBounds="true"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:clickable="true"
+        android:focusable="true"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_google_maps"
+        app:layout_constraintBottom_toBottomOf="@id/tvMessage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tvMessage" />
+
+    <View
+        android:id="@+id/viewSelect"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:background="?attr/selectableItemBackground"
+        android:padding="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

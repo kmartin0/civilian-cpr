@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="key_line_0">2dp</dimen>
+    <dimen name="key_line_1">40dp</dimen>
+    <dimen name="key_line_2">8dp</dimen>
+    <dimen name="key_line_3">12dp</dimen>
+    <dimen name="key_line_4">16dp</dimen>
+    <dimen name="key_line_5">24dp</dimen>
+
+    <dimen name="default_padding">@dimen/key_line_3</dimen>
+
+    <!--Emphasis modifiers for "on" colors-->
+    <dimen name="alpha_emphasis_high">@dimen/material_emphasis_high_type</dimen>
+    <dimen name="alpha_emphasis_medium">@dimen/material_emphasis_medium</dimen>
+    <dimen name="alpha_emphasis_disabled">@dimen/material_emphasis_disabled</dimen>
+
+    <dimen name="normal_fab_size">56dp</dimen>
+</resources>

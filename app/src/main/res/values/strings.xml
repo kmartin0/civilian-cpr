@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Civilian CPR Companion</string>
+
+    <string name="message_deleted_message">Successfully deleted messages.</string>
+    <string name="undo">Undo</string>
+    <string name="message_share">Share message</string>
+
+    <string name="msg_clipboard_label">Civil assistance message</string>
+    <string name="copy_success_message">Copied message to clipboard</string>
+    <string name="civil_assistance">Civil assistance</string>
+    <string name="emergency">Emergency</string>
+    <string name="notification_title">Emergency: %s</string>
+</resources>
