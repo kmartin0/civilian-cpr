@@ -9,7 +9,7 @@ android {
     compileSdkVersion 29
 
     defaultConfig {
-        applicationId "com.km.civilian.cpr.reanimeren"
+        applicationId "com.km.civilian.cpr"
         minSdkVersion 23
         targetSdkVersion 29
         versionCode 1

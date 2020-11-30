@@ -22,6 +22,40 @@
         <item name="colorOnSurface">@color/color_on_surface</item>
         <item name="colorOnError">@color/color_on_error</item>
 
+        <!--Material type attributes-->
+        <item name="textAppearanceHeadline1">@style/TextAppearance.Theme.Civilian.CPR.Headline1
+        </item>
+        <item name="textAppearanceHeadline2">@style/TextAppearance.Theme.Civilian.CPR.Headline2
+        </item>
+        <item name="textAppearanceHeadline3">@style/TextAppearance.Theme.Civilian.CPR.Headline3
+        </item>
+        <item name="textAppearanceHeadline4">@style/TextAppearance.Theme.Civilian.CPR.Headline4
+        </item>
+        <item name="textAppearanceHeadline5">@style/TextAppearance.Theme.Civilian.CPR.Headline5
+        </item>
+        <item name="textAppearanceHeadline6">@style/TextAppearance.Theme.Civilian.CPR.Headline6
+        </item>
+        <item name="textAppearanceSubtitle1">@style/TextAppearance.Theme.Civilian.CPR.Subtitle1
+        </item>
+        <item name="textAppearanceSubtitle2">@style/TextAppearance.Theme.Civilian.CPR.Subtitle2
+        </item>
+        <item name="textAppearanceBody1">@style/TextAppearance.Theme.Civilian.CPR.Body1</item>
+        <item name="textAppearanceBody2">@style/TextAppearance.Theme.Civilian.CPR.Body2</item>
+        <item name="textAppearanceButton">@style/TextAppearance.Theme.Civilian.CPR.Button</item>
+        <item name="textAppearanceCaption">@style/TextAppearance.Theme.Civilian.CPR.Caption</item>
+        <item name="textAppearanceOverline">@style/TextAppearance.Theme.Civilian.CPR.Overline</item>
+
+        <!--Material shape attributes-->
+        <item name="shapeAppearanceSmallComponent">
+            @style/ShapeAppearance.Theme.Civilian.CPR.SmallComponent
+        </item>
+        <item name="shapeAppearanceMediumComponent">
+            @style/ShapeAppearance.Theme.Civilian.CPR.MediumComponent
+        </item>
+        <item name="shapeAppearanceLargeComponent">
+            @style/ShapeAppearance.Theme.Civilian.CPR.LargeComponent
+        </item>
+
         <!--Component styles-->
         <item name="toolbarStyle">@style/Widget.MaterialComponents.Toolbar.PrimarySurface</item>
         <item name="windowActionModeOverlay">true</item>

@@ -69,13 +69,17 @@ class MessageListFragment : BaseMVVMFragment<FragmentMessageListBinding, Message
      * Delete [messages] from the database.
      */
     override fun onDelete(messages: List<Message>) {
+        // Make a copy of the messages to delete, for undo.
+        val tmpMessagesToDelete = messages.toMutableList()
+
+        // Delete the messages
         viewModel.deleteMessages(messages)
 
-        // Open snackbar with success message and undo option.
+        // Open snack bar with success message and undo option.
         Snackbar.make(rvMessages, getString(R.string.message_deleted_message), Snackbar.LENGTH_LONG)
             .setAction(getString(R.string.undo)) { _ ->
-                viewModel.insertMessages(messages)
-            }
+                viewModel.insertMessages(tmpMessagesToDelete)
+            }.show()
     }
 
     /**
@@ -85,7 +89,7 @@ class MessageListFragment : BaseMVVMFragment<FragmentMessageListBinding, Message
     override fun onStartDeleteActionMode(message: Message) {
         messagesAdapter.setMultiSelectMode(true)
         requireActivity().startActionMode(messagesAdapter)
-        messagesAdapter.setMessageSelected(message)
+        messagesAdapter.toggleMessageSelected(message)
     }
 
     /**

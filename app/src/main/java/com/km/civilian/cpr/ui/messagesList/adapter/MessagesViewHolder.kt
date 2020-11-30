@@ -39,14 +39,12 @@ class MessagesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
 
         when (multiSelect) {
             true -> setupMultiSelectView(message, isSelected, selectItem)
-            false -> setupNormalView(message)
+            false -> setupNormalView()
         }
-
     }
 
     /**
-     * Sets up the base view elements.
-     * Sets the date, text and the message icon.
+     * Sets up the base view elements which do not change during multi or regular view switch.
      */
     private fun setupBaseView(message: Message) {
         itemView.tvDate.text =
@@ -54,45 +52,54 @@ class MessagesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
         itemView.tvMessage.text = this.message?.text
 
         itemView.ivType.setImageResource(message.getTypeDrawableRes())
+        itemView.tvMessage.setOnCreateContextMenuListener(this)
+
+        if (message.getType() != MessageType.UNKNOWN) {
+            itemView.ivMaps.setOnClickListener { listener?.onNavigationClick(message) }
+            itemView.ivMaps.visibility = View.VISIBLE
+        } else {
+            itemView.ivMaps.setOnClickListener(null)
+            itemView.ivMaps.visibility = View.INVISIBLE
+        }
     }
 
     /**
      * Sets up the view for when the multi select action mode is active.
-     * Sets the following ui elements:
-     * - replace the message type icon with a checkbox and set it's check status
-     * - makes the entire view clickable and initialize it's callback.
-     * - removes menu and route navigation click.
      */
     private fun setupMultiSelectView(
         message: Message,
         isSelected: Boolean,
-        selectItem: (Message) -> Unit
+        toggleItemSelect: (Message) -> Unit
     ) {
-        itemView.cbSelect.isChecked = isSelected
-        itemView.ivMaps.setOnClickListener(null)
-        itemView.tvMessage.setOnCreateContextMenuListener(null)
-        itemView.viewSelect.setOnClickListener { selectItem(message) }
-        itemView.viewSelect.visibility = View.VISIBLE
+        // Remove message icon
         itemView.ivType.visibility = View.INVISIBLE
+
+        // Add checkbox, state and listener
+        itemView.cbSelect.isChecked = isSelected
         itemView.cbSelect.visibility = View.VISIBLE
+        itemView.cbSelect.setOnCheckedChangeListener { _, _ -> toggleItemSelect(message) }
+
+        // Add overlay so user can select entire item
+        itemView.viewSelect.setOnClickListener {
+            itemView.cbSelect.isChecked = !itemView.cbSelect.isChecked
+        }
+        itemView.viewSelect.visibility = View.VISIBLE
     }
 
     /**
      * Sets up the view for when the multi select action mode is not active.
-     * Sets the following ui elements:
-     * - Add navigation callback for map icon if the message type is known.
-     * - Add context menu listener on the message text.
-     * - Make the message type icon visible.
      */
-    private fun setupNormalView(message: Message) {
-        if (message.getType() != MessageType.UNKNOWN) itemView.ivMaps.setOnClickListener {
-            listener?.onNavigationClick(message)
-        } else itemView.ivMaps.setOnClickListener(null)
-        itemView.tvMessage.setOnCreateContextMenuListener(this)
+    private fun setupNormalView() {
+        // Add message icon.
+        itemView.ivType.visibility = View.VISIBLE
+
+        // Remove Checkbox.
+        itemView.cbSelect.visibility = View.INVISIBLE
+        itemView.cbSelect.setOnCheckedChangeListener(null)
+
+        // Remove item checkbox listener overlay.
         itemView.viewSelect.setOnClickListener(null)
         itemView.viewSelect.visibility = View.INVISIBLE
-        itemView.ivType.visibility = View.VISIBLE
-        itemView.cbSelect.visibility = View.INVISIBLE
     }
 
     /**

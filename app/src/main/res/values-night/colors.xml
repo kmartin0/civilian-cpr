@@ -12,16 +12,16 @@
     <!--background. colorSurface is mapped to the surface of components such as cards, sheets-->
     <!--and menus. colorError is used to indicate an error state for components such as-->
     <!--text fields. E57654 -->
-    <color name="color_background">#ffffff</color> <!-- Deep Purple 100 -->
-    <color name="color_surface">#f2f2f2</color>  <!-- TEMP FIND ACTUAL MATERIAL COLOR -->
-    <color name="color_error">#B00020</color>
+    <color name="color_background">#000a12</color> <!-- Deep Purple 100 -->
+    <color name="color_surface">#263238</color>  <!-- TEMP FIND ACTUAL MATERIAL COLOR -->
+    <color name="color_error">#ffffff</color>
 
     <!--"On" colors define how text, icons and strokes are colored in relation to the surface-->
     <!--on which they appear.-->
-    <color name="color_on_primary">#ffffff</color>
-    <color name="color_on_secondary">#ffffff</color>
-    <color name="color_on_background">#000000</color>
-    <color name="color_on_surface">#000000</color>
-    <color name="color_on_error">#ffffff</color>
+    <color name="color_on_primary">#000000</color>
+    <color name="color_on_secondary">#000000</color>
+    <color name="color_on_background">#ffffff</color>
+    <color name="color_on_surface">#ffffff</color>
+    <color name="color_on_error">#000000</color>
 
 </resources>

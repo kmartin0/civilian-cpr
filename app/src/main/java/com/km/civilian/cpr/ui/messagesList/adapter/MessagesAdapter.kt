@@ -1,5 +1,6 @@
 package com.km.civilian.cpr.ui.messagesList.adapter
 
+import android.util.Log
 import android.view.*
 import androidx.recyclerview.widget.RecyclerView
 import com.km.civilian.cpr.R
@@ -31,7 +32,7 @@ class MessagesAdapter(
             messages[position],
             messageClickListener,
             selectedItems.contains(messages[position]),
-            ::setMessageSelected,
+            ::toggleMessageSelected,
             multiSelect
         )
 
@@ -42,7 +43,7 @@ class MessagesAdapter(
      * from [selectedItems]. Update ui by notifying the adapter data set changed and invalidating
      * the action mode.
      */
-    fun setMessageSelected(message: Message) {
+    fun toggleMessageSelected(message: Message) {
         if (multiSelect) {
             if (selectedItems.contains(message)) selectedItems.remove(message)
             else selectedItems.add(message)

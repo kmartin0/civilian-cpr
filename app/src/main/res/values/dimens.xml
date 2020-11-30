@@ -2,7 +2,7 @@
 <resources>
 
     <dimen name="key_line_0">2dp</dimen>
-    <dimen name="key_line_1">40dp</dimen>
+    <dimen name="key_line_1">4dp</dimen>
     <dimen name="key_line_2">8dp</dimen>
     <dimen name="key_line_3">12dp</dimen>
     <dimen name="key_line_4">16dp</dimen>

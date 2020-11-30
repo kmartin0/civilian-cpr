@@ -36,7 +36,7 @@ data class Message(
         return when (getType()) {
             MessageType.AED -> R.drawable.ic_defibrillator
             MessageType.CPR -> R.drawable.ic_cpr
-            MessageType.UNKNOWN -> R.drawable.ic_baseline_chat_bubble_24
+            MessageType.UNKNOWN -> R.drawable.ic_chat_bubble
         }
     }
 }
