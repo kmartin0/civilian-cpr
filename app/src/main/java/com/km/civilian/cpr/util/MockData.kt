@@ -41,3 +41,15 @@ class MockData {
         }
     }
 }
+
+// adb emu sms send +3197005159109 REANIMATIE! A. Moenstraat 5, Amsterdam https://hvw.page.link/2aNVw5ZrYS4GE8oB9
+
+// adb emu sms send +3197005159109 REANIMATIE! Scheerderslaan 29, Wezep https://hvw.page.link/2aNVw5ZrYS4GE8oB9
+
+// adb emu sms send +3197005159109 U heeft (1) voicemail ontvangen.
+
+// adb emu sms send +3197005159109 Haal AED: Bronland 103, CODE Pincode 8119 Ga naar Bornsesteeg 10, Wageningen https://hvw.page.link/ByHpTuTEdCivCCEu8
+
+// adb emu sms send +3197005159109 REANIMATIE! Mariëndaal 810, Ede https://hvw.page.link/2aNVw5ZrYS4GE8oB9
+
+// adb emu sms send +3197005159109 Haal AED: Maasstraat 47, CODE Pincode 7229 Ga naar Volkerakstraat 57F, Amsterdam https://hvw.page.link/ByHpTuTEdCivCCEu8

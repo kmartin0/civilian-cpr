@@ -32,9 +32,4 @@ class MessageListViewModel @ViewModelInject constructor(
             messageRepository.delete(messages)
         }
     }
-
-    // adb emu sms send +3197005159109 REANIMATIE! Boris Pasternakstraat 57, Amsterdam https://hvw.page.link/2aNVw5ZrYS4GE8oB9
-
-    // adb emu sms send +3197005159109 Haal AED: Daalwijkdreef 11, CODE Pincode 7229 Ga naar Anton de Komplein 232, Amsterdam https://hvw.page.link/ByHpTuTEdCivCCEu8
-
 }
