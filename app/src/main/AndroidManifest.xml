@@ -11,7 +11,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Civilian.CPR">
+        android:theme="@style/Theme.Civilian.CPR"
+        android:fullBackupContent="@xml/backup_descriptor">
         <receiver
             android:name="com.km.civilian.cpr.receiver.MySmsReceiver"
             android:enabled="true"

@@ -1,6 +1,5 @@
 package com.km.civilian.cpr.ui.messagesList.adapter
 
-import android.util.Log
 import android.view.*
 import androidx.recyclerview.widget.RecyclerView
 import com.km.civilian.cpr.R

@@ -10,4 +10,12 @@
     <string name="civil_assistance">Civil assistance</string>
     <string name="emergency">Emergency</string>
     <string name="notification_title">Emergency: %s</string>
+
+    <string name="parcels_empty_state_title">No messages in your inbox.</string>
+    <string name="parcels_empty_state_message">New sms messages from the Hartstichting (+3197005159109) will be intercepted and displayed here. Make sure to allow sms permission.</string>
+
+    <string name="copy">Copy</string>
+    <string name="share">Share</string>
+    <string name="delete">Delete</string>
+    <string name="select_all">Select all</string>
 </resources>

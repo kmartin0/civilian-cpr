@@ -7,7 +7,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
@@ -20,7 +19,6 @@ import com.km.civilian.cpr.ui.messagesList.adapter.MessageItemDecoration
 import com.km.civilian.cpr.ui.messagesList.adapter.MessagesAdapter
 import com.km.civilian.cpr.util.MapsUtils
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_message_list.*
 
 @AndroidEntryPoint
 class MessageListFragment : BaseMVVMFragment<FragmentMessageListBinding, MessageListViewModel>(),
@@ -39,10 +37,11 @@ class MessageListFragment : BaseMVVMFragment<FragmentMessageListBinding, Message
      * Initialize the recycler view.
      */
     private fun initViews() {
-        rvMessages.adapter = messagesAdapter
-        rvMessages.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-        rvMessages.addItemDecoration(MessageItemDecoration(requireContext()))
-        registerForContextMenu(rvMessages)
+        binding.rvMessages.adapter = messagesAdapter
+        binding.rvMessages.layoutManager =
+            LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+        binding.rvMessages.addItemDecoration(MessageItemDecoration(requireContext()))
+        registerForContextMenu(binding.rvMessages)
     }
 
     /**
@@ -50,12 +49,27 @@ class MessageListFragment : BaseMVVMFragment<FragmentMessageListBinding, Message
      */
     private fun initObservers() {
         // Observe the messages LiveData. Re-add them to the messages list, notify the adapter and scroll to the last message.
-        viewModel.messages.observe(viewLifecycleOwner, Observer {
+        viewModel.messages.observe(viewLifecycleOwner, {
+            val tmpMessagesSize = messages.size
             messages.clear()
             messages.addAll(it)
             messagesAdapter.notifyDataSetChanged()
-            rvMessages.scrollToPosition(messages.size.minus(1))
+
+            // When messages are added scroll to the newest.
+            if (tmpMessagesSize <= messages.size) binding.rvMessages.scrollToPosition(
+                messages.size.minus(1)
+            )
+
+            setEmptyState(it.isEmpty())
         })
+    }
+
+    /**
+     * Sets the visibility of the empty state view.
+     * @param empty Boolean to determine the empty state.
+     */
+    private fun setEmptyState(empty: Boolean) {
+        binding.messagesEmptyStateView.root.visibility = if (empty) View.VISIBLE else View.INVISIBLE
     }
 
     /**
@@ -76,8 +90,12 @@ class MessageListFragment : BaseMVVMFragment<FragmentMessageListBinding, Message
         viewModel.deleteMessages(messages)
 
         // Open snack bar with success message and undo option.
-        Snackbar.make(rvMessages, getString(R.string.message_deleted_message), Snackbar.LENGTH_LONG)
-            .setAction(getString(R.string.undo)) { _ ->
+        Snackbar.make(
+            binding.rvMessages,
+            getString(R.string.message_deleted_message),
+            Snackbar.LENGTH_LONG
+        )
+            .setAction(getString(R.string.undo)) {
                 viewModel.insertMessages(tmpMessagesToDelete)
             }.show()
     }

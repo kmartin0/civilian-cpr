@@ -1,9 +1,12 @@
 apply plugin: 'com.android.application'
+
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
-apply plugin: "androidx.navigation.safeargs.kotlin"
+
 apply plugin: "kotlin-kapt"
+
 apply plugin: 'dagger.hilt.android.plugin'
+
+apply plugin: "androidx.navigation.safeargs.kotlin"
 
 android {
     compileSdkVersion 29
@@ -27,9 +30,7 @@ android {
 
     buildFeatures {
         dataBinding = true
-    }
-    androidExtensions {
-        experimental = true
+        viewBinding = true
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -43,19 +44,20 @@ android {
 ext {
     appCompatVersion = '1.2.0'
     constraintLayoutVersion = '2.0.4'
-    materialVersion = '1.3.0-alpha03'
+    materialVersion = '1.3.0-alpha04'
     lifecycleVersion = '2.2.0'
-    navigationComponentsVersion = '2.3.1'
+    navigationComponentsVersion = '2.3.2'
     rxKotlinVersion = "2.4.0"
     rxAndroidVersion = "2.1.1"
     rxjavaVersion = "2.2.10"
     junitVersion = '4.12'
     androidxJunitVersion = '1.1.2'
     espressoVersion = '3.3.0'
-    activity_version = '1.2.0-beta01'
+    activity_version = '1.2.0-beta02'
+    fragment_version = '1.3.0-beta02'
     room_version = '2.2.5'
     hilt_version = '2.30.1-alpha'
-    hilt_jetpack_integration_version = '1.0.0-alpha01'
+    hilt_jetpack_integration_version = '1.0.0-alpha02'
 }
 
 dependencies {
@@ -90,7 +92,7 @@ dependencies {
 
     // Permissions
     implementation "androidx.activity:activity-ktx:$activity_version"
-    implementation 'androidx.fragment:fragment-ktx:1.3.0-beta01'
+    implementation "androidx.fragment:fragment-ktx:$fragment_version"
 
     // Room
     implementation "androidx.room:room-runtime:$room_version"

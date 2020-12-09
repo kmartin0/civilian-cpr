@@ -6,7 +6,6 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.telephony.SmsMessage
-import com.km.civilian.cpr.enum.MessageType
 import com.km.civilian.cpr.model.Message
 import com.km.civilian.cpr.repository.IMessageRepository
 import com.km.civilian.cpr.util.Constants
@@ -40,10 +39,8 @@ class MySmsReceiver : BroadcastReceiver() {
             }
         }
 
-        // If the message type is known send out a notification.
-        if (message.getType() != MessageType.UNKNOWN) {
-            NotificationBuilder.build(context, message)
-        }
+        // Send the user a push notification for this message.
+        NotificationBuilder.build(context, message)
 
     }
 

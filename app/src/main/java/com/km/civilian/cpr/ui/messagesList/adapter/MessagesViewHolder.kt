@@ -5,9 +5,9 @@ import android.view.MenuInflater
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.km.civilian.cpr.R
+import com.km.civilian.cpr.databinding.ItemMessageBinding
 import com.km.civilian.cpr.enum.MessageType
 import com.km.civilian.cpr.model.Message
-import kotlinx.android.synthetic.main.item_message.view.*
 import java.text.DateFormat
 
 class MessagesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
@@ -35,31 +35,38 @@ class MessagesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
         this.listener = messageClickListener
         this.message = message
 
-        setupBaseView(message)
+        val binding = ItemMessageBinding.bind(itemView)
+
+        setupBaseView(binding)
 
         when (multiSelect) {
-            true -> setupMultiSelectView(message, isSelected, selectItem)
-            false -> setupNormalView()
+            true -> setupMultiSelectView(message, binding, isSelected, selectItem)
+            false -> setupNormalView(binding)
         }
     }
 
     /**
      * Sets up the base view elements which do not change during multi or regular view switch.
      */
-    private fun setupBaseView(message: Message) {
-        itemView.tvDate.text =
-            DateFormat.getDateTimeInstance(DateFormat.FULL, DateFormat.MEDIUM).format(message.date)
-        itemView.tvMessage.text = this.message?.text
+    private fun setupBaseView(binding: ItemMessageBinding) {
+        with(binding) {
+            message?.let {
+                tvDate.text =
+                    DateFormat.getDateTimeInstance(DateFormat.FULL, DateFormat.MEDIUM)
+                        .format(it.date)
+                tvMessage.text = message?.text
 
-        itemView.ivType.setImageResource(message.getTypeDrawableRes())
-        itemView.tvMessage.setOnCreateContextMenuListener(this)
+                ivType.setImageResource(it.getTypeDrawableRes())
+                tvMessage.setOnCreateContextMenuListener(this@MessagesViewHolder)
 
-        if (message.getType() != MessageType.UNKNOWN) {
-            itemView.ivMaps.setOnClickListener { listener?.onNavigationClick(message) }
-            itemView.ivMaps.visibility = View.VISIBLE
-        } else {
-            itemView.ivMaps.setOnClickListener(null)
-            itemView.ivMaps.visibility = View.INVISIBLE
+                if (it.getType() != MessageType.UNKNOWN) {
+                    ivMaps.setOnClickListener { _ -> listener?.onNavigationClick(it) }
+                    ivMaps.visibility = View.VISIBLE
+                } else {
+                    ivMaps.setOnClickListener(null)
+                    ivMaps.visibility = View.INVISIBLE
+                }
+            }
         }
     }
 
@@ -68,38 +75,42 @@ class MessagesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
      */
     private fun setupMultiSelectView(
         message: Message,
+        binding: ItemMessageBinding,
         isSelected: Boolean,
         toggleItemSelect: (Message) -> Unit
     ) {
-        // Remove message icon
-        itemView.ivType.visibility = View.INVISIBLE
+        with(binding) {
+            // Remove message icon
+            ivType.visibility = View.INVISIBLE
 
-        // Add checkbox, state and listener
-        itemView.cbSelect.isChecked = isSelected
-        itemView.cbSelect.visibility = View.VISIBLE
-        itemView.cbSelect.setOnCheckedChangeListener { _, _ -> toggleItemSelect(message) }
+            // Add checkbox, state and listener
+            cbSelect.isChecked = isSelected
+            cbSelect.visibility = View.VISIBLE
 
-        // Add overlay so user can select entire item
-        itemView.viewSelect.setOnClickListener {
-            itemView.cbSelect.isChecked = !itemView.cbSelect.isChecked
+            // Add overlay so user can select entire item
+            viewSelect.setOnClickListener {
+                toggleItemSelect(message)
+            }
+            viewSelect.visibility = View.VISIBLE
         }
-        itemView.viewSelect.visibility = View.VISIBLE
     }
 
     /**
      * Sets up the view for when the multi select action mode is not active.
      */
-    private fun setupNormalView() {
-        // Add message icon.
-        itemView.ivType.visibility = View.VISIBLE
+    private fun setupNormalView(binding: ItemMessageBinding) {
+        with(binding) {
+            // Add message icon.
+            ivType.visibility = View.VISIBLE
 
-        // Remove Checkbox.
-        itemView.cbSelect.visibility = View.INVISIBLE
-        itemView.cbSelect.setOnCheckedChangeListener(null)
+            // Remove Checkbox.
+            cbSelect.visibility = View.INVISIBLE
+            cbSelect.setOnCheckedChangeListener(null)
 
-        // Remove item checkbox listener overlay.
-        itemView.viewSelect.setOnClickListener(null)
-        itemView.viewSelect.visibility = View.INVISIBLE
+            // Remove item checkbox listener overlay.
+            viewSelect.setOnClickListener(null)
+            viewSelect.visibility = View.INVISIBLE
+        }
     }
 
     /**

@@ -11,18 +11,31 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.km.civilian.cpr.R
+import com.km.civilian.cpr.databinding.ActivityMainBinding
+import com.km.civilian.cpr.repository.IMessageRepository
 import com.km.civilian.cpr.util.NotificationBuilder
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
+    @Inject
+    lateinit var messageRepository: IMessageRepository
+
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
 
+        initViewBinding()
         initNavFragment()
         checkSmsPermission()
+    }
+
+    private fun initViewBinding() {
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
     }
 
     /**

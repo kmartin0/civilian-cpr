@@ -11,4 +11,12 @@
     <string name="civil_assistance">Burgerhulpverlening</string>
     <string name="emergency">Noodgeval</string>
     <string name="notification_title">Noodgeval: %s</string>
+
+    <string name="parcels_empty_state_title">Uw inbox is leeg.</string>
+    <string name="parcels_empty_state_message">Nieuwe sms berichten van de Hartstichting (+3197005159109) worden onderschept en hier getoond. Zorg ervoor dat sms machtigingen zijn toegestaan.</string>
+
+    <string name="copy">Kopiëren</string>
+    <string name="share">Delen</string>
+    <string name="delete">Verwijderen</string>
+    <string name="select_all">Alles selecteren</string>
 </resources>

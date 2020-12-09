@@ -2,7 +2,6 @@ package com.km.civilian.cpr.ui.messagesList
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.km.civilian.cpr.base.BaseViewModel
