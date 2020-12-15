@@ -29,28 +29,28 @@ class MySmsReceiver : BroadcastReceiver() {
      */
     override fun onReceive(context: Context, intent: Intent) {
         // Get the SMS message.
-        val textMessage = getTextFromHartstichtingSms(intent.extras)
-        val message = Message(0, textMessage, Date())
+        getTextFromHartstichtingSms(intent.extras)?.let { textMessage ->
+            val message = Message(0, textMessage, Date())
 
-        // Insert the message in the app database if it contains text.
-        if (message.text.isNotBlank()) {
-            GlobalScope.launch(Dispatchers.IO) {
-                messageRepository.insert(message)
+            // Insert the message in the app database if it contains text.
+            if (message.text.isNotBlank()) {
+                GlobalScope.launch(Dispatchers.IO) {
+                    messageRepository.insert(message)
+                }
             }
+
+            // Send the user a push notification for this message.
+            NotificationBuilder.build(context, message)
         }
-
-        // Send the user a push notification for this message.
-        NotificationBuilder.build(context, message)
-
     }
 
     /**
      * Retrieve message from a hartstichting sms.
      *
      * @param extras Bundle containing the sms data.
-     * @return text from the sms if it's from the hartstichting.
+     * @return String? text from the sms if it's from the hartstichting otherwise null.
      */
-    private fun getTextFromHartstichtingSms(extras: Bundle?): String {
+    private fun getTextFromHartstichtingSms(extras: Bundle?): String? {
         if (extras == null || !extras.containsKey("format") || !extras.containsKey("pdus")) return ""
 
         val format = extras.getString("format")
@@ -65,7 +65,7 @@ class MySmsReceiver : BroadcastReceiver() {
         }
 
         // Return the message if the sms has come from the hartstichting
-        return if (phoneNumber.equals(Constants.HARTSTICHTING_PHONE_NUMBER)) txt else ""
+        return if (phoneNumber.equals(Constants.HARTSTICHTING_PHONE_NUMBER)) txt else null
     }
 
     /**
