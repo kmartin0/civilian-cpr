@@ -46,7 +46,7 @@ class MapsUtils {
                     // For AED return a maps uri to the AED as the first way point and then the emergency destination.
                     MessageType.AED -> {
                         val aedWayPoint =
-                            text.substringAfter("Haal AED: ").substringBefore(", CODE")
+                            text.substringAfter("Haal AED: ").substringBefore(", Pincode")
                         val destination =
                             text.substringAfter("Ga naar ").substringBefore(" https://")
 
