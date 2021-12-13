@@ -23,7 +23,8 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name="com.km.civilian.cpr.ui.MainActivity">
+        <activity android:name="com.km.civilian.cpr.ui.MainActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
