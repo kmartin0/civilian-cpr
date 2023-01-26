@@ -88,7 +88,7 @@ class NotificationBuilder {
                         context,
                         1,
                         MapsUtils.getMapsIntentForMessage(message),
-                        0
+                        PendingIntent.FLAG_IMMUTABLE
                     )
                 }
                 MessageType.UNKNOWN -> {
@@ -98,7 +98,7 @@ class NotificationBuilder {
                     }
 
                     // Return pending intent to start main activity.
-                    PendingIntent.getActivity(context, 1, intent, 0)
+                    PendingIntent.getActivity(context, 1, intent, PendingIntent.FLAG_IMMUTABLE)
                 }
             }
         }

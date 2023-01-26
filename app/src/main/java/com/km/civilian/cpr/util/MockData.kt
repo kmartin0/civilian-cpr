@@ -19,7 +19,7 @@ class MockData {
                 ),
                 Message(
                     0,
-                    "Haal AED: Bronland 103, CODE Pincode 8119 Ga naar Bornsesteeg 10, Wageningen https://hvw.page.link/ByHpTuTEdCivCCEu8",
+                    "Haal AED: Bronland 103, Pincode 8119 Ga naar Bornsesteeg 10, Wageningen https://hvw.page.link/ByHpTuTEdCivCCEu8",
                     Date(1590763814000)
                 ),
                 Message(
@@ -34,7 +34,7 @@ class MockData {
                 ),
                 Message(
                     0,
-                    "Haal AED: Maasstraat 47, CODE Pincode 7229 Ga naar Volkerakstraat 57F, Amsterdam https://hvw.page.link/ByHpTuTEdCivCCEu8",
+                    "Haal AED: Maasstraat 47, Pincode 7229 Ga naar Volkerakstraat 57F, Amsterdam https://hvw.page.link/ByHpTuTEdCivCCEu8",
                     Date(1605440316000)
                 )
             )
