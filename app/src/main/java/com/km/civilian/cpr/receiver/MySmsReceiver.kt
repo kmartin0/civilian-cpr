@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.provider.Telephony
 import android.telephony.SmsMessage
 import com.km.civilian.cpr.model.Message
 import com.km.civilian.cpr.repository.IMessageRepository
@@ -29,7 +30,7 @@ class MySmsReceiver : BroadcastReceiver() {
      */
     override fun onReceive(context: Context, intent: Intent) {
         // Get the SMS message.
-        getTextFromHartstichtingSms(intent.extras)?.let { textMessage ->
+        getTextFromHartstichtingSms(intent.extras, intent)?.let { textMessage ->
             val message = Message(0, textMessage, Date())
 
             // Insert the message in the app database if it contains text.
@@ -50,22 +51,21 @@ class MySmsReceiver : BroadcastReceiver() {
      * @param extras Bundle containing the sms data.
      * @return String? text from the sms if it's from the hartstichting otherwise null.
      */
-    private fun getTextFromHartstichtingSms(extras: Bundle?): String? {
-        if (extras == null || !extras.containsKey("format") || !extras.containsKey("pdus")) return ""
+    private fun getTextFromHartstichtingSms(extras: Bundle?, intent: Intent): String? {
 
-        val format = extras.getString("format")
-        val pdus = extras.get("pdus") as Array<*>
-        var txt = ""
-        var phoneNumber: String? = ""
+        val messages = Telephony.Sms.Intents.getMessagesFromIntent(intent)
 
-        for (pdu in pdus) {
-            val smsMessage = getSmsMessage(pdu as ByteArray?, format)
-            txt += smsMessage?.displayMessageBody
-            phoneNumber = smsMessage?.originatingAddress
+        val messageSB = StringBuilder()
+        var phoneNumber: String? = null
+
+        for (message in messages) {
+            if (message.originatingAddress.equals(Constants.HARTSTICHTING_PHONE_NUMBER, ignoreCase = true)) {
+                    messageSB.append(message.displayMessageBody)
+                    phoneNumber = message.originatingAddress
+                }
         }
 
-        // Return the message if the sms has come from the hartstichting
-        return if (phoneNumber.equals(Constants.HARTSTICHTING_PHONE_NUMBER)) txt else null
+        return if (phoneNumber?.equals(Constants.HARTSTICHTING_PHONE_NUMBER, ignoreCase = true) == true) messageSB.toString() else null
     }
 
     /**
@@ -81,6 +81,7 @@ class MySmsReceiver : BroadcastReceiver() {
                 pdu,
                 format
             )
+
             else -> SmsMessage.createFromPdu(pdu)
         }
     }
