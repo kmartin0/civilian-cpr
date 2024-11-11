@@ -1,15 +1,17 @@
 package com.km.civilian.cpr.ui.messagesList
 
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.km.civilian.cpr.base.BaseViewModel
 import com.km.civilian.cpr.model.Message
 import com.km.civilian.cpr.repository.IMessageRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class MessageListViewModel @ViewModelInject constructor(
+@HiltViewModel
+class MessageListViewModel @Inject constructor(
     private val messageRepository: IMessageRepository
 ) : BaseViewModel() {
 
