@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <uses-feature
+        android:name="android.hardware.telephony"
+        android:required="false" />
+
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
 
     <application
@@ -11,7 +16,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Civilian.CPR"
-        android:fullBackupContent="@xml/backup_descriptor">
+        android:dataExtractionRules="@xml/backup_descriptor">
         <receiver
             android:name="com.km.civilian.cpr.receiver.MySmsReceiver"
             android:enabled="true"
