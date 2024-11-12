@@ -49,19 +49,17 @@ class MessageListFragment : BaseMVVMFragment<FragmentMessageListBinding, Message
      */
     private fun initObservers() {
         // Observe the messages LiveData. Re-add them to the messages list, notify the adapter and scroll to the last message.
-        viewModel.messages.observe(viewLifecycleOwner, {
-            val tmpMessagesSize = messages.size
-            messages.clear()
-            messages.addAll(it)
-            messagesAdapter.notifyDataSetChanged()
+        viewModel.messages.observe(viewLifecycleOwner) {
+
+            messagesAdapter.updateMessageList(it)
 
             // When messages are added scroll to the newest.
-            if (tmpMessagesSize <= messages.size) binding.rvMessages.scrollToPosition(
+            if (it.size <= messages.size) binding.rvMessages.scrollToPosition(
                 messages.size.minus(1)
             )
 
             setEmptyState(it.isEmpty())
-        })
+        }
     }
 
     /**

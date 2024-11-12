@@ -1,6 +1,8 @@
 package com.km.civilian.cpr.ui.messagesList.adapter
 
+import android.annotation.SuppressLint
 import android.view.*
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.km.civilian.cpr.R
 import com.km.civilian.cpr.model.Message
@@ -11,11 +13,21 @@ class MessagesAdapter(
 ) : RecyclerView.Adapter<MessagesViewHolder>(), ActionMode.Callback {
 
     private var multiSelect = false
-    private var selectedItems = arrayListOf<Message>()
+    private var selectedItems = mutableSetOf<Int>()
     private var actionMode: ActionMode? = null
 
     init {
         setHasStableIds(true)
+    }
+
+    fun updateMessageList(newList: List<Message>) {
+        val diffCallback = MessageDiffCallback(messages, newList)
+        val diffResult = DiffUtil.calculateDiff(diffCallback)
+
+        messages.clear()
+        messages.addAll(newList)
+
+        diffResult.dispatchUpdatesTo(this)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MessagesViewHolder {
@@ -30,31 +42,40 @@ class MessagesAdapter(
         holder.bindView(
             messages[position],
             messageClickListener,
-            selectedItems.contains(messages[position]),
+            selectedItems.contains(messages[position].id),
             ::toggleMessageSelected,
             multiSelect
         )
 
     override fun getItemId(position: Int): Long = messages[position].id.toLong()
 
+
     /**
      * If multi select is active then toggle the selection of [message] by adding or removing it
-     * from [selectedItems]. Update ui by notifying the adapter data set changed and invalidating
-     * the action mode.
+     * from [selectedItems]. Update ui by notifying the adapter the [message] has changed and invalidating
+     * the action mode which updates the title with number of selections.
      */
     fun toggleMessageSelected(message: Message) {
+
         if (multiSelect) {
-            if (selectedItems.contains(message)) selectedItems.remove(message)
-            else selectedItems.add(message)
-            notifyDataSetChanged()
+            if (selectedItems.contains(message.id)) selectedItems.remove(message.id)
+            else selectedItems.add(message.id)
+
+            notifyItemChanged(messages.indexOfFirst { it.id == message.id })
+
             actionMode?.invalidate()
         }
+
     }
 
+    /**
+     * Set the adapter internal multi selection state.
+     */
     fun setMultiSelectMode(multiSelect: Boolean) {
         this.multiSelect = multiSelect
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun onCreateActionMode(mode: ActionMode?, menu: Menu?): Boolean {
         // Inflate the menu resource providing context menu items
         val inflater: MenuInflater? = mode?.menuInflater
@@ -79,7 +100,7 @@ class MessagesAdapter(
     override fun onActionItemClicked(mode: ActionMode?, item: MenuItem?): Boolean {
         // On delete click, call the listeners' onDelete function.
         if (item?.itemId == R.id.action_delete) {
-            messageClickListener.onDelete(selectedItems)
+            messageClickListener.onDelete(messages.filter { selectedItems.contains(it.id) })
             mode?.finish()
         }
 
@@ -96,6 +117,7 @@ class MessagesAdapter(
      *
      * Update ui by notifying the adapter the data set has changed.
      */
+    @SuppressLint("NotifyDataSetChanged")
     override fun onDestroyActionMode(mode: ActionMode?) {
         setMultiSelectMode(false)
         selectedItems.clear()
@@ -110,16 +132,18 @@ class MessagesAdapter(
      *
      * Update the ui by invalidating the action mode and notifying the adapter that the data set has changed.
      */
+    @SuppressLint("NotifyDataSetChanged")
     private fun toggleSelectAll() {
         if (selectedItems.size != messages.size) {
             selectedItems.clear()
-            selectedItems.addAll(messages)
+            selectedItems.addAll(messages.map { it.id })
         } else {
             selectedItems.clear()
         }
 
-        actionMode?.invalidate()
         notifyDataSetChanged()
+        actionMode?.invalidate()
+
     }
 
 }
