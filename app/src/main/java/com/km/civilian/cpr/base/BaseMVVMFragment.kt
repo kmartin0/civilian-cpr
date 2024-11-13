@@ -23,7 +23,7 @@ abstract class BaseMVVMFragment<T : ViewDataBinding, V : BaseViewModel> : BaseFr
         savedInstanceState: Bundle?
     ): View {
         binding = DataBindingUtil.inflate(inflater, getLayoutId(), container, false)
-        viewModel =  ViewModelProvider(this).get(getVMClass())
+        viewModel = ViewModelProvider(this)[getVMClass()]
         binding.lifecycleOwner = activity as AppCompatActivity
 
         initViewModelBinding()
